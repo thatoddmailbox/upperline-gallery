@@ -1,0 +1,38 @@
+<div id="center-text">
+	<h1>Yay</h1>
+	<p class="lead">bla bla bla bla blaaaaaaaaaa bla bla bla</p>
+</div>
+<% require "redcarpet" %>
+<% project_count = 0 %>
+<% has_ended_div = false %>
+<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = {:escape_html => true}), autolink: true, tables: true) %>
+<% projects.each do |project| %>
+	<% has_ended_div = false %>
+	<% if project_count % 3 == 0 %>
+		<div class="row project-row">
+	<% end %>
+	<div class="col-md-4">
+		<div class="project-thumb"><img src="http://api.page2images.com/directlink?p2i_url=<%= URI.encode project.url %>&p2i_key=a24fc41a86876fb5"></div>
+		<div class="project-name"><%= h project.name %></div>
+		<div class="project-authors"><%= h project.authors %></div>
+		<div class="project-url"><a href="<%= URI.encode project.url %>"><i class="glyphicon glyphicon-globe"></i> <%= h project.url %></a></div>
+		<div class="project-desc">
+		<% if project.description != "" %>
+			<%= markdown.render(project.description) %>
+		<% else %>
+			<em class="no-desc">No description given.</em>
+		<% end %>
+		</div>
+		<a href="<%= URI.encode project.url %>" class="btn btn-primary">Visit it</a>
+	</div>
+	<% if project_count % 3 == 2 %>
+		<% has_ended_div = true %>
+		</div>
+	<% end %>
+	<% project_count += 1 %>
+<% end %>
+<% if not has_ended_div %>
+</div>
+<% end %>
+
+<link rel="stylesheet" href="css/projects.css" />

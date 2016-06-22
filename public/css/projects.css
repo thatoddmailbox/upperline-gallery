@@ -1,0 +1,27 @@
+body {
+	padding: 50px;
+}
+#center-text {
+	padding: 0 20px 20px 20px;
+	text-align: center;
+}
+.project-row {
+	margin-bottom: 10px;
+}
+.project-thumb img {
+	width: 100%;
+}
+.project-name {
+	font-size: 1.6em;
+}
+.project-authors {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.project-authors:before {
+	content: "by ";
+	font-weight: normal;
+}
+.no-desc {
+	font-style: italic;
+}
