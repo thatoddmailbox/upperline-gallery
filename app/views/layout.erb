@@ -11,5 +11,9 @@
 	</head>
 	<body>
 		<%= yield %>
+		<hr>
+		<footer>
+			<a href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
+		</footer>
 	</body>
 </html>
