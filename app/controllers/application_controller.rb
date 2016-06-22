@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
     set :views, "app/views"
     set :public_folder, "public"
 
-    before do 
+    before do
         @CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
         @CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
     end
@@ -31,6 +31,15 @@ class ApplicationController < Sinatra::Base
 
         def get_github_url(client_id, client_secret)
             return "https://github.com/login/oauth/authorize?scope=user:email&client_id=" + client_id
+        end
+
+        def get_screenshot_url(id, url)
+            if not File.exists?("./public/screenshots/" + id.to_s + ".png")
+                IO.popen(["phantomjs", "./phantom_screenshot.js", id.to_s, url]) do |io|
+                    io.gets
+                end
+            end
+            return "screenshots/" + id.to_s + ".png"
         end
     end
 
