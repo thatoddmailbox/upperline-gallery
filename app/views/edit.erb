@@ -1,0 +1,13 @@
+<h1>Edit project</h1>
+<div class="alert alert-warning" role="alert">
+	<strong>Warning!</strong>
+	Editing your project will require it to be reapproved before it is available on the home page.
+</div>
+<form action="/edit" method="POST">
+	<input type="hidden" name="id" value="<%= h params[:id] %>" />
+	<input type="text" name="name" placeholder="Project name" class="form-control" value="<%= h project.name %>" />
+	<input type="text" name="authors" placeholder="Project authors" class="form-control" value="<%= h project.authors %>" />
+	<input type="url" name="url" placeholder="Project URL (include the http://!)" class="form-control" value="<%= h project.url %>"  />
+	<textarea name="description" placeholder="Project description" class="form-control"><%= h project.description %></textarea>
+	<input type="submit" class="btn btn-primary btn-lg" value="Update project" />
+</form>
