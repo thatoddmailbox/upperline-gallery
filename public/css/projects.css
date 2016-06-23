@@ -50,7 +50,12 @@ body {
 }
 
 .project-desc {
+	font-weight: 200;
+	font-size: 1.0em;
+}
 
+.project-desc:first-letter{
+  text-transform: capitalize
 }
 
 .no-desc {
