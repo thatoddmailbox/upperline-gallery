@@ -1,13 +1,33 @@
-<h1>Edit project</h1>
+<link rel="stylesheet" href="css/projects.css" />
+
+
+<div class="center-text">
+	<img height="120" src="//static1.squarespace.com/static/567458eda128e6372f9c1656/t/568d23a5bfe87399730d04b5/1466015926308/?format=1500w" alt="Upperline School of Code">
+	<br>
+	<p class="lead">Edit Project</p>
+</div>
+
 <div class="alert alert-warning" role="alert">
 	<strong>Warning!</strong>
 	Editing your project will require it to be reapproved before it is available on the home page.
 </div>
-<form action="/edit" method="POST">
-	<input type="hidden" name="id" value="<%= h params[:id] %>" />
-	<input type="text" name="name" placeholder="Project name" class="form-control" value="<%= h project.name %>" />
-	<input type="text" name="authors" placeholder="Project authors" class="form-control" value="<%= h project.authors %>" />
-	<input type="url" name="url" placeholder="Project URL (include the http://!)" class="form-control" value="<%= h project.url %>"  />
-	<textarea name="description" placeholder="Project description" class="form-control"><%= h project.description %></textarea>
-	<input type="submit" class="btn btn-primary btn-lg" value="Update project" />
-</form>
+
+<div class = "edit-form">
+	<form action="/edit" method="POST">
+		<input type="hidden" name="id" value="<%= h params[:id] %>" />
+		<br>
+		<p class = "form-label">Project name:</p>
+		<input type="text" name="name" placeholder="Project name" class="form-control" value="<%= h project.name %>" />
+		<br>
+		<p class = "form-label">Creators:</p>
+		<input type="text" name="authors" placeholder="Project authors" class="form-control" value="<%= h project.authors %>" />
+		<br>
+		<p class = "form-label">URL:</p>
+		<input type="url" name="url" placeholder="Project URL (include the http://!)" class="form-control" value="<%= h project.url %>"  />
+		<br>
+		<p class = "form-label">Description:</p>
+		<textarea name="description" placeholder="Project description" class="form-control"><%= h project.description %></textarea>
+		<br>
+		<input type="submit" class="btn btn-primary btn-lg url_button" id="update_button" value="Update project" />
+	</form>
+</div>

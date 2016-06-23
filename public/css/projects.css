@@ -1,7 +1,7 @@
 body {
 	padding: 50px;
 }
-#center-text {
+.center-text {
 	padding: 0 20px 20px 20px;
 	text-align: center;
 }
@@ -11,6 +11,13 @@ body {
 	font-weight: 100;
 	letter-spacing: 10px;
 }
+
+.form-label {
+	font-size: 1.0em;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+
 .project-row {
 	margin-bottom: 10px;
 }
@@ -93,4 +100,16 @@ body {
 .footer-url:hover {
 	color: #a7dac8;
 	text-decoration: none;
+}
+
+.edit-form {
+  margin: 0 auto;
+	width: 500px
+}
+#update_button {
+	width: 500px;
+}
+
+.form-text-input {
+	border:#1ca287;
 }
