@@ -10,6 +10,8 @@ gem "bcrypt"
 
 gem "redcarpet"
 
+gem 'rest-client'
+
 group :development do
   gem "pry"
   gem "shotgun"

@@ -13,7 +13,15 @@
 		<%= yield %>
 		<hr>
 		<footer>
-			<a href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
+			<% if not session[:logged_in] %>
+				<a href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
+			<% else %>
+				<img src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny" /> Logged in as <strong><%= h session[:username] %></strong>.
+				<% if session[:is_admin] %>
+				 	<a href="/admin">Administration</a> &bull; 
+				<% end %>
+				<a href="/submit">Submit project</a> &bull; <a href="/logout">Log out</a>
+			<% end %>
 		</footer>
 	</body>
 </html>

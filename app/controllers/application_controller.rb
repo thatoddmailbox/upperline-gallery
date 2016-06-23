@@ -2,6 +2,8 @@ require_relative "../../config/environment"
 
 require_relative "../models/project.rb"
 
+require 'rest-client'
+
 class ApplicationController < Sinatra::Base
 
     enable :sessions
@@ -13,12 +15,15 @@ class ApplicationController < Sinatra::Base
     before do
         @CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
         @CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+
+        # yes, this is dumb, but it works and I don't want to deal with activerecord so too bad
+        @admins = ["thatoddmailbox"]
     end
 
     after do
         if not @CLIENT_ID or not @CLIENT_SECRET
             puts "****** GITHUB API CREDENTIALS NOT SET ******"
-            puts "Create an application at https://github.com/settings/applications."
+            puts "Create an application at https://github.com/settings/developers."
             puts "Then, set the environment variables GH_BASIC_CLIENT_ID and GH_BASIC_SECRET_ID."
             response.body = "GitHub API credentials aren't set - look at the console for more information."
         end
@@ -47,7 +52,15 @@ class ApplicationController < Sinatra::Base
         erb :index, :layout => :layout, locals: {projects: Project.order(created_at: :desc).where(approved: true)}
     end
 
+    get "/logout" do
+        session.clear
+        redirect "/"
+    end
+
     get "/submit" do
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
         erb :submit, :layout => :layout
     end
 
@@ -66,4 +79,59 @@ class ApplicationController < Sinatra::Base
         "Submitted!"
     end
 
+    get "/callback" do
+        # get temporary GitHub code...
+        session_code = request.env['rack.request.query_hash']['code']
+
+        # ... and POST it back to GitHub
+        result = RestClient.post('https://github.com/login/oauth/access_token',
+                              {:client_id => @CLIENT_ID,
+                               :client_secret => @CLIENT_SECRET,
+                               :code => session_code},
+                               :accept => :json)
+
+        # extract the token and granted scopes
+        access_token = JSON.parse(result)['access_token']
+        session[:logged_in] = true
+        session[:access_token] = access_token
+
+        auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
+                                        {:params => {:access_token => access_token}}))
+
+        session[:username] = auth_result["login"]
+        session[:user_id] = auth_result["id"]
+        session[:avatar_url] = auth_result["avatar_url"]
+        session[:is_admin] = @admins.include?(session[:username])
+
+        redirect "/"
+    end
+
+    get "/admin" do
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
+        if not session[:is_admin]
+            return "You do not have access to this page. If you should, try logging out and back in again."
+        end
+        erb :admin, :layout => :layout, locals: {unapproved: Project.order(created_at: :desc).where(approved: false) }
+    end
+
+    get "/approve" do
+        if not params[:id]
+            return "Missing id parameter!"
+        end
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
+        if not session[:is_admin]
+            return "You do not have access to this page. If you should, try logging out and back in again."
+        end
+        p = Project.where(id: params[:id].to_i).first
+        if not p
+            return "Invalid ID"
+        end
+        p.approved = true
+        p.save
+        redirect "/admin"
+    end
 end
