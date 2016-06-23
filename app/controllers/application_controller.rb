@@ -179,6 +179,12 @@ class ApplicationController < Sinatra::Base
         p.description = params[:description]
         p.approved = false
         p.save
+
+        # this will delete the project's screenshot so it will be recreated later
+        if File.exists?("public/screenshots/" + p.id.to_s + ".png")
+            File.delete("public/screenshots/" + p.id.to_s + ".png")
+        end
+
         "Done! Note that your project must be reapproved to appear on the homepage."
     end
 end
