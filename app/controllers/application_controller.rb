@@ -65,6 +65,9 @@ class ApplicationController < Sinatra::Base
     end
 
     post "/submit" do
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
         if not (params[:name] and params[:authors] and params[:url] and params[:description])
             return "All fields are required."
         end
@@ -73,7 +76,8 @@ class ApplicationController < Sinatra::Base
             :authors => params[:authors],
             :url => params[:url],
             :description => params[:description],
-            :approved => false
+            :approved => false,
+            :owner => session[:username]
         })
         project.save
         "Submitted!"
