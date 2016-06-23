@@ -1,6 +1,7 @@
 <div id="center-text">
-	<h1>Upperline Code</h1>
-	<p class="lead">Project Gallery</p>
+	<img height="120" src="//static1.squarespace.com/static/567458eda128e6372f9c1656/t/568d23a5bfe87399730d04b5/1466015926308/?format=1500w" alt="Upperline School of Code">
+	<br>
+	<p class="lead">Student Project Gallery</p>
 </div>
 <% require "redcarpet"
 project_count = 0
@@ -23,7 +24,7 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 			<em class="no-desc">No description given.</em>
 		<% end %>
 		</div>
-		<a href="<%= URI.encode project.url %>" class="btn btn-primary">Visit it</a>
+		<a href="<%= URI.encode project.url %>" class="btn btn-primary btn-lg btn-block url_button">Visit it</a>
 	</div>
 	<% if project_count % 3 == 2 %>
 		<% has_ended_div = true %>

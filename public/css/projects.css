@@ -5,6 +5,12 @@ body {
 	padding: 0 20px 20px 20px;
 	text-align: center;
 }
+
+.lead {
+	font-size: 4.0em;
+	font-weight: 100;
+	letter-spacing: 10px;
+}
 .project-row {
 	margin-bottom: 10px;
 }
@@ -12,16 +18,74 @@ body {
 	width: 100%;
 }
 .project-name {
-	font-size: 1.6em;
+	font-size: 2.0em;
+	font-weight: 200;
 }
 .project-authors {
-	font-size: 1.2em;
-	font-weight: bold;
+	font-size: 1.5em;
+	color: #2d2f2e;
+	font-weight: 100;
 }
 .project-authors:before {
 	content: "by ";
-	font-weight: normal;
+	font-weight: 100;
+	color: #2d2f2e;
 }
+
+.project-url a {
+	color: #2d2f2e;
+}
+
+.project-url:hover a {
+	color: #1ca287;
+	text-decoration: none;
+}
+
+.project-url a i {
+	color: #2d2f2e;
+}
+
+.project-url:hover a i {
+	color: #1ca287;
+}
+
+.project-desc {
+
+}
+
 .no-desc {
 	font-style: italic;
+}
+
+.url_button {
+	color: #1ca287;
+	background-color: white;
+  border-radius: 300px;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #1ca287;
+}
+
+.url_button:hover {
+	color: white;
+	background-color: #1ca287;
+  border-radius: 300px;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #1ca287;
+}
+
+.footer-url {
+	color: #1ca287;
+}
+
+.footer-url:hover {
+	color: #a7dac8;
+	text-decoration: none;
 }
