@@ -183,13 +183,19 @@ class ApplicationController < Sinatra::Base
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
             return "You do not have access to this page. If you should, try logging out and back in again."
         end
-        if not (params[:name] and params[:authors] and params[:url] and params[:description])
+        if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
             return "All fields are required."
+        end
+        ghrepo = params[:ghrepo]
+        ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
+        if not ghrepo.start_with?("https://github.com/")
+            return "Invalid GitHub URL - make sure it starts with https://github.com!"
         end
         p.name = params[:name]
         p.authors = params[:authors]
         p.url = params[:url]
         p.description = params[:description]
+        p.github_repo = ghrepo
         p.approved = false
         p.save
 
