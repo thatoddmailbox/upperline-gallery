@@ -41,7 +41,14 @@ class ApplicationController < Sinatra::Base
         def get_screenshot_url(id, url)
             if not File.exists?("./public/screenshots/" + id.to_s + ".png")
                 IO.popen(["phantomjs", "./phantom_screenshot.js", id.to_s, url]) do |io|
-                    io.gets
+                    while true
+                        output = io.gets
+                        if output
+                            puts "[phantomjs] " + output
+                        else
+                            break
+                        end
+                    end
                 end
             end
             return "screenshots/" + id.to_s + ".png"
