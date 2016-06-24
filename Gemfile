@@ -6,6 +6,10 @@ gem "activerecord"
 gem "sinatra-activerecord"
 gem "rake"
 
+gem 'sinatra-flash', '~> 0.3.0'
+gem 'rack-flash3'
+gem 'sinatra-redirect-with-flash'
+
 gem "bcrypt"
 
 gem "redcarpet"

@@ -197,7 +197,6 @@ class ApplicationController < Sinatra::Base
         if File.exists?("public/screenshots/" + p.id.to_s + ".png")
             File.delete("public/screenshots/" + p.id.to_s + ".png")
         end
-
-        "Done! Note that your project must be reapproved to appear on the homepage."
+        redirect "/"
     end
 end
