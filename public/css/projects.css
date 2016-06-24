@@ -106,7 +106,7 @@ body {
   margin: 0 auto;
 	width: 500px
 }
-#update_button {
+.form_button {
 	width: 500px;
 }
 

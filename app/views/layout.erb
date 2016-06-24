@@ -13,6 +13,7 @@
 		<%= yield %>
 		<hr>
 		<footer>
+			<a class="footer-url" href="/">Home</a>
 			<% if not session[:logged_in] %>
 				<a class="footer-url" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
 			<% else %>
