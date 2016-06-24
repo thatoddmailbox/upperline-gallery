@@ -68,14 +68,20 @@ class ApplicationController < Sinatra::Base
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
-        if not (params[:name] and params[:authors] and params[:url] and params[:description])
+        if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
             return "All fields are required."
+        end
+        ghrepo = params[:ghrepo]
+        ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
+        if not ghrepo.start_with?("https://github.com/")
+            return "Invalid GitHub URL - make sure it starts with https://github.com!"
         end
         project = Project.new({
             :name => params[:name],
             :authors => params[:authors],
             :url => params[:url],
             :description => params[:description],
+            :github_repo => ghrepo,
             :approved => false,
             :owner => session[:username]
         })
