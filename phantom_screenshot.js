@@ -18,6 +18,8 @@ page.open(args[2], function(status) {
 	console.log("Status: " + status);
 	if (status === "success") {
 		page.render("public/screenshots/" + args[1] + ".png");
+	} else {
+		fs.copy("public/fail.png", "public/screenshots/" + args[1] + ".png");
 	}
 	phantom.exit();
 });
