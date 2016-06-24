@@ -206,4 +206,39 @@ class ApplicationController < Sinatra::Base
 
         "Done! Note that your project must be reapproved to appear on the homepage."
     end
+
+    get "/delete" do
+        if not params[:id]
+            return "Missing id parameter!"
+        end
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
+        p = Project.where(id: params[:id].to_i).first
+        if not p
+            return "Invalid ID"
+        end
+        if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
+            return "You do not have access to this page. If you should, try logging out and back in again."
+        end
+        erb :delete, :layout => :layout, locals: {project: p}
+    end
+
+    post "/delete" do
+        if not params[:id]
+            return "Missing id parameter!"
+        end
+        if not session[:logged_in]
+            redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
+        end
+        p = Project.where(id: params[:id].to_i).first
+        if not p
+            return "Invalid ID"
+        end
+        if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
+            return "You do not have access to this page. If you should, try logging out and back in again."
+        end
+        Project.delete(p.id)
+        "Deleted."
+    end
 end
