@@ -238,6 +238,6 @@ class ApplicationController < Sinatra::Base
             return "You do not have access to this page. If you should, try logging out and back in again."
         end
         Project.delete(p.id)
-        "Deleted."
+        redirect "/"
     end
 end

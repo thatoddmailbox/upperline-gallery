@@ -1,9 +1,33 @@
 body {
 	padding: 50px;
 }
+
+.header-links a{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #3f4040;
+	font-size: 1.8em;
+	top: 30px;
+	position: relative;
+	letter-spacing: 5px;
+}
+
+.header-links a:hover{
+	color: #606162;
+	text-decoration: none;
+
+}
+
 .center-text {
 	padding: 0 20px 20px 20px;
 	text-align: center;
+	left: 50%;
+}
+.div-border{
+	border-radius: 10px;
+	border: 2px solid black;
+	width: auto;
 }
 
 .lead {
@@ -11,11 +35,90 @@ body {
 	font-weight: 100;
 	letter-spacing: 10px;
 }
+.unapproved-label{
+	font-size: 2.0em;
+	font-weight: 400;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+.delete-confirmation{
+	font-size: 3.0em;
+	font-weight: 300;
+	letter-spacing: 2px;
+}
+.delete-button:hover{
+	color: white;
+	background-color: #ff3333;
+	border: 2px solid #ff3333;
+}
+.delete-button{
+	color: #e60000;
+	background-color: white;
+	border-radius: 300px;
+	font-size: 30px;
+	text-transform: uppercase;
+	letter-spacing: 8px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #e60000;
+	width:300px;
+	height:60px;
+}
+.inline{
+	display:inline-block;
+}
 
+.center-header{
+	float:left;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	left:5%;
+}
+
+/*.home-header{
+	font-size: 2.0em;
+	top: 30px;
+	position: relative;
+}*/
+
+/*.home-header:hover {
+	color: #a7dac8;
+	text-decoration: none;
+}*/
+
+.cancel-button{
+	color: #1ca287;
+	background-color: white;
+  border-radius: 300px;
+	font-size: 30px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #1ca287;
+	width:300px;
+	height:60px;
+}
+.cancel-button:hover{
+	color: white;
+	background-color: #1ca287;
+	border: 2px solid #1ca287;
+}
+.cannot-undone {
+	font-size: 1.8em;
+	font-weight: 400;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
 .form-label {
 	font-size: 1.0em;
 	font-weight: 500;
 	letter-spacing: 1px;
+}
+
+.vert-align {
+	vertical-align: middle;
 }
 
 .project-row {
@@ -37,6 +140,12 @@ body {
 	content: "by ";
 	font-weight: 100;
 	color: #2d2f2e;
+}
+
+.project-owner {
+	font-size: 1.0em;
+	color: #2d2f2e;
+	font-weight: 200;
 }
 
 .project-url a {
@@ -67,6 +176,8 @@ body {
 
 .no-desc {
 	font-style: italic;
+	font-weight: 200;
+	font-size: 1.0em;
 }
 
 .url_button {
