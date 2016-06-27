@@ -9,6 +9,11 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, 'secret secret cookie' # FIXME: make an actual secret
 
+    # allow it to be iframed
+    set :protection, :except => :frame_options
+
+    set :logger, Logger.new(STDOUT)
+
     set :views, "app/views"
     set :public_folder, "public"
 
@@ -44,7 +49,7 @@ class ApplicationController < Sinatra::Base
                     while true
                         output = io.gets
                         if output
-                            puts "[phantomjs] " + output
+                            logger.info("[phantomjs] " + output)
                         else
                             break
                         end
