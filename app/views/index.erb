@@ -3,7 +3,7 @@
 	<div class="header-links-right">
 		<ul>
 			<% if not session[:logged_in] %>
-				<li><a class="footer-url" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a></li>
+				<li><a class="footer-url" target="_parent" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a></li>
 			<% else %>
 			<div id="git-avatar">
 				<li><img style="width:75px; height:75px;" src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny"/>
