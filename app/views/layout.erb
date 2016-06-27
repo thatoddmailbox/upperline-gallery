@@ -13,10 +13,10 @@
 		<%= yield %>
 		<hr>
 		<script>
-			if (window.location.href == "https://gallery.upperlinecode.com/") {
+			if (window.top.location.href == "https://gallery.upperlinecode.com/") {
 				// go to the page with the iframe
 				// this is used for handling the callback from github
-				window.location = "http://www.upperlinecode.com/student-project-gallery";
+				window.top.location = "http://www.upperlinecode.com/student-project-gallery";
 			}
 		</script>
 	</body>
