@@ -1,25 +1,26 @@
-<nav>
-	<div class="center-header header-links"><a href="/">Home</a></div>
-	<div class="center-text">
-		<a href="/" ><img height="120" src="//static1.squarespace.com/static/567458eda128e6372f9c1656/t/568d23a5bfe87399730d04b5/1466015926308/?format=1500w" alt="Upperline School of Code"></a>
-		<br>
-	</div>
-	<div class="center-header header-links-right">
-		<!-- <% if not session[:logged_in] %>
-			<a class="footer-url" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
-		<% else %>
-			<img src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny" /> Logged in as <strong><%= h session[:username] %></strong>.
-			<% if session[:is_admin] %>
-				<a class="footer-url" href="/admin">Administrator</a> &bull;
-			<% end %>
-			<a class="footer-url" href="/submit">Submit project</a> &bull;
-			<a class="footer-url" href="/logout">Log out</a>
-		<% end %> -->
-	</div>
-</nav>
-<div class="center-text">
+<div class="nav">
 	<p class="lead">Student Project Gallery</p>
+	<div class="header-links-right">
+		<ul>
+			<% if not session[:logged_in] %>
+				<li><a class="footer-url" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a></li>
+			<% else %>
+			<div id="git-avatar">
+				<li><img style="width:75px; height:75px;" src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny"/>
+				<span id="hidden-username"> Logged in as <br><strong><%=h session[:username]%></strong> </span></li>
+			</div>
+			<div id="function-stack">
+				<li><a class="footer-url" href="/submit"><span style="font-size: 33px;" class="glyphicon glyphicon-plus"></span></a></li>
+					<% if session[:is_admin] %>
+				<li><a class="footer-url" href="/admin">Admin</a></li>
+					<% end %>
+				<li><a class="footer-url" href="/logout">Log out</a></li>
+					<% end %>
+			</div>
+		</ul>
+	</div>
 </div>
+
 
 <% require "redcarpet"
 project_count = 0
@@ -43,14 +44,16 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 			<em class="no-desc">No description given.</em>
 		<% end %>
 		</div>
-		<a href="<%= URI.encode project.url %>" class="btn btn-primary btn-lg btn-block url_button">Visit it</a>
-		<% if project.github_repo %>
-			<a href="<%= URI.encode project.github_repo %>" class="btn btn-default btn-lg btn-block url_button">View on GitHub</a>
-		<% end %>
-		<% if session[:logged_in] and (project.owner == session[:username] or session[:is_admin]) %>
-			<a href="/edit?id=<%= project.id %>" class="btn btn-default btn-lg btn-block url_button">Edit project</a>
-			<a href="/delete?id=<%= project.id %>" class="btn btn-default btn-lg btn-block url_button">Delete project</a>
-		<% end %>
+		<div>
+			<a href="<%= URI.encode project.url %>" class="btn btn-primary btn-lg btn-block small_url_button">Visit</a>
+			<% if project.github_repo %>
+				<a href="<%= URI.encode project.github_repo %>" class="btn btn-default btn-lg small_url_button">GitHub</a>
+			<% end %>
+			<% if session[:logged_in] and (project.owner == session[:username] or session[:is_admin]) %>
+				<a href="/edit?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button">Edit</a>
+				<!-- <a href="/delete?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button">Delete</a> -->
+			<% end %>
+		</div>
 	</div>
 	<% if project_count % 3 == 2 %>
 		<% has_ended_div = true %>
