@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<title>Upperline Project Gallery</title>
-		<link rel="shortcut icon" type="image/x-icon" href="http://www.upperlinecode.com/favicon.ico">
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link href="css/main.css" rel="stylesheet">
 
@@ -13,17 +12,6 @@
 	<body>
 		<%= yield %>
 		<hr>
-		<footer>
-			<% if not session[:logged_in] %>
-				<a class="footer-url" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a>
-			<% else %>
-				<img src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny" /> Logged in as <strong><%= h session[:username] %></strong>.
-				<% if session[:is_admin] %>
-				 	<a class="footer-url" href="/admin">Administrator</a> &bull;
-				<% end %>
-				<a class="footer-url" href="/submit">Submit project</a> &bull;
-				<a class="footer-url" href="/logout">Log out</a>
-			<% end %>
-		</footer>
+
 	</body>
 </html>
