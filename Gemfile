@@ -16,6 +16,8 @@ gem "redcarpet"
 
 gem 'rest-client'
 
+gem "pg"
+
 group :development do
   gem "pry"
   gem "shotgun"
