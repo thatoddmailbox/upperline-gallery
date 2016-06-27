@@ -14,7 +14,7 @@ page.clipRect = {
 	width:  800,
 	height: 600
 };
-page.settings.resourceTimeout = 2000; // if it takes longer than 2 seconds to load the page, just give up
+page.settings.resourceTimeout = 4000; // if it takes longer than 2 seconds to load the page, just give up
 
 page.onResourceTimeout = function(request) {
     console.log("Timed out!");
