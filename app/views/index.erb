@@ -45,9 +45,9 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 		<% end %>
 		</div>
 		<div>
-			<a href="<%= URI.encode project.url %>" class="btn btn-primary btn-lg btn-block small_url_button">Visit</a>
+			<a href="<%= URI.encode project.url %>" target="_parent" class="btn btn-primary btn-lg btn-block small_url_button">Visit</a>
 			<% if project.github_repo %>
-				<a href="<%= URI.encode project.github_repo %>" class="btn btn-default btn-lg small_url_button">GitHub</a>
+				<a href="<%= URI.encode project.github_repo %>" target="_parent" class="btn btn-default btn-lg small_url_button">GitHub</a>
 			<% end %>
 			<% if session[:logged_in] and (project.owner == session[:username] or session[:is_admin]) %>
 				<a href="/edit?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button">Edit</a>
