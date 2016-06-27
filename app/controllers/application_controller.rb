@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
         @CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
         # yes, this is dumb, but it works and I don't want to deal with activerecord so too bad
-        @admins = ["thatoddmailbox", "carsonlevine"]
+        @admins = ["thatoddmailbox", "carsonlevine", "dfenjves"]
     end
 
     after do
