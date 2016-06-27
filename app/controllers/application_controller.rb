@@ -9,6 +9,9 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, 'secret secret cookie' # FIXME: make an actual secret
 
+    # allow it to be iframed
+    set :protection, :except => :frame_options
+
     set :views, "app/views"
     set :public_folder, "public"
 
