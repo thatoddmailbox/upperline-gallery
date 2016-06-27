@@ -1,6 +1,11 @@
 body {
 	padding: 50px;
 }
+.nav {
+	display: block;
+	vertical-align: middle;
+	padding: 0 20px 20px 20px;
+}
 
 .header-links a{
 	font-family: 'Montserrat', sans-serif;
@@ -19,21 +24,35 @@ body {
 
 }
 
-.center-text {
-	padding: 0 20px 20px 20px;
-	text-align: center;
-	left: 50%;
-}
 .div-border{
 	border-radius: 10px;
 	border: 2px solid black;
 	width: auto;
 }
 
+#function-stack {
+	display:block;
+	width: 60px;
+	float: right;
+	padding-right: 5px;
+	font-size: 12px;
+}
+#hidden-username {
+	display: none;
+	font-size: 12px;
+	position: fixed;
+}
+#git-avatar:hover #hidden-username {
+	display: block;
+}
+#git-avatar {
+	display: inline;
+}
 .lead {
 	font-size: 4.0em;
 	font-weight: 100;
 	letter-spacing: 10px;
+	float:left;
 }
 .unapproved-label{
 	font-size: 2.0em;
@@ -55,14 +74,13 @@ body {
 	color: #e60000;
 	background-color: white;
 	border-radius: 300px;
-	font-size: 30px;
+	font-size: 15px;
 	text-transform: uppercase;
-	letter-spacing: 8px;
+	letter-spacing: 2px;
 	font-weight: 600;
 	font-style: normal;
 	border: 2px solid #e60000;
-	width:300px;
-	height:60px;
+
 }
 .inline{
 	display:inline-block;
@@ -74,6 +92,25 @@ body {
 	text-align: center;
 	position: relative;
 	left:5%;
+}
+
+.header-links-right{
+	float: right;
+	width: 15%;
+}
+
+ul {
+	list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+	display: inline;
+	float:right;
+}
+li a {
+	display: block;
+	position: relative;
 }
 
 /*.home-header{
@@ -206,6 +243,7 @@ body {
 
 .footer-url {
 	color: #1ca287;
+	float: right;
 }
 
 .footer-url:hover {
@@ -223,4 +261,24 @@ body {
 
 .form-text-input {
 	border:#1ca287;
+}
+
+.small_url_button {
+	color: #1ca287;
+	background-color: white;
+  border-radius: 300px;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #1ca287;
+	width: 100px;
+	float:left;
+}
+
+.small_url_button:hover {
+	color: white;
+	background-color: #1ca287;
+	border: 2px solid #1ca287;
 }
