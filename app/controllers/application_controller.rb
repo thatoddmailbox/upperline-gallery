@@ -62,7 +62,7 @@ class ApplicationController < Sinatra::Base
     end
 
     get "/" do
-        erb :index, :layout => :layout, locals: {projects: Project.order(created_at: :desc).where(approved: true)}
+        erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(created_at: :desc).where(approved: true)}
     end
 
     get "/logout" do
@@ -74,7 +74,7 @@ class ApplicationController < Sinatra::Base
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
-        erb :submit, :layout => :layout
+        erb :submit, :layout => :layout, locals: {title: "Submit project"}
     end
 
 
@@ -83,13 +83,13 @@ class ApplicationController < Sinatra::Base
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
-            return erb :error, :layout => :layout, locals: {error: "All fields except GitHub repository are required."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "All fields except GitHub repository are required."}
         end
         ghrepo = params[:ghrepo]
         if ghrepo != ""
             ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
             if not ghrepo.start_with?("https://github.com/")
-                return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+                return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
             end
         end
         project = Project.new({
@@ -137,24 +137,24 @@ class ApplicationController < Sinatra::Base
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         if not session[:is_admin]
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
-        erb :admin, :layout => :layout, locals: {unapproved: Project.order(created_at: :desc).where(approved: false) }
+        erb :admin, :layout => :layout, locals: {title: "Manage projects", unapproved: Project.order(created_at: :desc).where(approved: false) }
     end
 
     get "/approve" do
         if not params[:id]
-            return erb :error, :layout => :layout, locals: {error: "Missing id parameter!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         if not session[:is_admin]
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
         p = Project.where(id: params[:id].to_i).first
         if not p
-            return erb :error, :layout => :layout, locals: {error: "Invalid ID"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid ID"}
         end
         p.approved = true
         p.save
@@ -163,43 +163,43 @@ class ApplicationController < Sinatra::Base
 
     get "/edit" do
         if not params[:id]
-            return erb :error, :layout => :layout, locals: {error: "Missing id parameter!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         p = Project.where(id: params[:id].to_i).first
         if not p
-            return erb :error, :layout => :layout, locals: {error: "Invalid ID"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid ID"}
         end
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
-        erb :edit, :layout => :layout, locals: {project: p}
+        erb :edit, :layout => :layout, locals: {title: "Edit project", project: p}
     end
 
     post "/edit" do
         if not params[:id]
-            return erb :error, :layout => :layout, locals: {error: "Missing id parameter!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         p = Project.where(id: params[:id].to_i).first
         if not p
-            return erb :error, :layout => :layout, locals: {error: "Invalid ID"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid ID"}
         end
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
         if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
-            return erb :error, :layout => :layout, locals: {error: "All fields except GitHub repository are required!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "All fields except GitHub repository are required!"}
         end
         ghrepo = params[:ghrepo]
         if ghrepo != ""
             ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
             if not ghrepo.start_with?("https://github.com/")
-                return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+                return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
             end
         end
         p.name = params[:name]
@@ -219,34 +219,34 @@ class ApplicationController < Sinatra::Base
 
     get "/delete" do
         if not params[:id]
-            return erb :error, :layout => :layout, locals: {error: "Missing id parameter!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         p = Project.where(id: params[:id].to_i).first
         if not p
-            return erb :error, :layout => :layout, locals: {error: "Invalid ID"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid ID"}
         end
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
-        erb :delete, :layout => :layout, locals: {project: p}
+        erb :delete, :layout => :layout, locals: {title: "Confirm deletion", project: p}
     end
 
     post "/delete" do
         if not params[:id]
-            return erb :error, :layout => :layout, locals: {error: "Missing id parameter!"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         p = Project.where(id: params[:id].to_i).first
         if not p
-            return erb :error, :layout => :layout, locals: {error: "Invalid ID"}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "Invalid ID"}
         end
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
-            return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
+            return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
         Project.delete(p.id)
         redirect "/"
