@@ -1,28 +1,5 @@
 <link rel="stylesheet" href="css/projects.css" />
 
-<div class="nav">
-	<p class="lead pageheader">Edit Project</p>
-	<div class="header-links-right">
-		<ul>
-			<% if not session[:logged_in] %>
-				<li><a class="footer-url" target="_parent" href="<%= get_github_url(@CLIENT_ID, @CLIENT_SECRET) %>">Sign in with GitHub</a></li>
-			<% else %>
-			<div id="git-avatar">
-				<li><img style="width:75px; height:75px;" src="<%= URI.encode session[:avatar_url] %>" class="avatar-tiny"/>
-				<span id="hidden-username"> Logged in as <br><strong><%=h session[:username]%></strong> </span></li>
-			</div>
-			<div id="function-stack">
-				<li><a class="footer-url" href="/submit"><span style="font-size: 33px;" class="glyphicon glyphicon-plus"></span></a></li>
-					<% if session[:is_admin] %>
-				<li><a class="footer-url" href="/admin">Admin</a></li>
-					<% end %>
-				<li><a class="footer-url" href="/logout">Log out</a></li>
-					<% end %>
-			</div>
-		</ul>
-	</div>
-</div>
-
 <div class="alert alert-warning" role="alert">
 	<strong>Warning!</strong>
 	Editing your project will require it to be reapproved before it is available on the home page.
