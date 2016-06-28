@@ -82,7 +82,7 @@ class ApplicationController < Sinatra::Base
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
-        if params[:name] != "" or params[:authors] != "" or params[:url] != "" or params[:description] != ""
+        if params[:name] == "" or params[:authors] == "" or params[:url] == "" or params[:description] == ""
             return erb :error, :layout => :layout, locals: {title: "Error", error: "All fields except GitHub repository are required."}
         end
         ghrepo = params[:ghrepo]
@@ -192,7 +192,7 @@ class ApplicationController < Sinatra::Base
         if (p.owner and p.owner != session[:username]) and (not session[:is_admin])
             return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
-        if params[:name] != "" or params[:authors] != "" or params[:url] != "" or params[:description] != ""
+        if params[:name] == "" or params[:authors] == "" or params[:url] == "" or params[:description] == ""
             return erb :error, :layout => :layout, locals: {title: "Error", error: "All fields except GitHub repository are required!"}
         end
         ghrepo = params[:ghrepo]
