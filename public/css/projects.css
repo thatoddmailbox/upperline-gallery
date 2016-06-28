@@ -1,6 +1,6 @@
 body {
 	padding: 50px;
-  min-width: 1050px;
+	margin-bottom: 50px;
 }
 .nav {
 	display: block;
@@ -89,8 +89,29 @@ body {
 	font-weight: 600;
 	font-style: normal;
 	border: 2px solid #e60000;
-
 }
+
+.delete-request-button{
+	color: #e60000;
+	background-color: white;
+	border-radius: 300px;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	font-style: normal;
+	border: 2px solid #e60000;
+	display: block;
+	width: 100%;
+	margin: 5px 2px 10px 2px;
+	height: 43px;
+}
+.delete-request-button:hover{
+	color: white;
+	background-color: #ff3333;
+	border: 2px solid #ff3333;
+}
+
 .inline{
 	display:inline-block;
 }
