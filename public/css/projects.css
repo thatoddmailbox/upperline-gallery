@@ -42,6 +42,10 @@ body {
 	padding-right: 5px;
 	font-size: 12px;
 }
+
+#function-stack li {
+	margin: 0 0 0 0;
+}
 #hidden-username {
 	display: none;
 	font-size: 12px;
