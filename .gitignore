@@ -1,3 +1,4 @@
 .bundle/
 db/database.db
 public/screenshots/*
+Gemfile.lock

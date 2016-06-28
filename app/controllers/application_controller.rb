@@ -6,8 +6,9 @@ require 'rest-client'
 
 class ApplicationController < Sinatra::Base
 
-    enable :sessions
-    set :session_secret, 'secret secret cookie' # FIXME: make an actual secret
+    use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :secret => 'secret secret cookie' # FIXME: a real secret
 
     # allow it to be iframed
     set :protection, :except => :frame_options
