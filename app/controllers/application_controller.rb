@@ -83,12 +83,14 @@ class ApplicationController < Sinatra::Base
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
         end
         if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
-            return erb :error, :layout => :layout, locals: {error: "All fields are required."}
+            return erb :error, :layout => :layout, locals: {error: "All fields except GitHub repository are required."}
         end
         ghrepo = params[:ghrepo]
-        ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
-        if not ghrepo.start_with?("https://github.com/")
-            return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+        if ghrepo != ""
+            ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
+            if not ghrepo.start_with?("https://github.com/")
+                return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+            end
         end
         project = Project.new({
             :name => params[:name],
@@ -191,12 +193,14 @@ class ApplicationController < Sinatra::Base
             return erb :error, :layout => :layout, locals: {error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
         if not (params[:name] and params[:authors] and params[:url] and params[:description] and params[:ghrepo])
-            return erb :error, :layout => :layout, locals: {error: "All fields are required!"}
+            return erb :error, :layout => :layout, locals: {error: "All fields except GitHub repository are required!"}
         end
         ghrepo = params[:ghrepo]
-        ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
-        if not ghrepo.start_with?("https://github.com/")
-            return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+        if ghrepo != ""
+            ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
+            if not ghrepo.start_with?("https://github.com/")
+                return erb :error, :layout => :layout, locals: {error: "Invalid GitHub URL - make sure it starts with https://github.com!"}
+            end
         end
         p.name = params[:name]
         p.authors = params[:authors]
