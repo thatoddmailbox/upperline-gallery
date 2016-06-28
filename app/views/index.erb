@@ -1,3 +1,7 @@
+<% if params[:submitted] %>
+	<div class="alert alert-success" role="alert"><strong>Success!</strong> Your project was submitted! It must be approved before it is visible on the homepage.</div>
+<% end %>
+
 <% require "redcarpet"
 project_count = 0
 has_ended_div = false

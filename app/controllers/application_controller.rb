@@ -102,7 +102,7 @@ class ApplicationController < Sinatra::Base
             :owner => session[:username]
         })
         project.save
-        "Submitted!"
+        redirect "/?submitted=true"
     end
 
     get "/callback" do
