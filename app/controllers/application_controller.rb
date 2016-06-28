@@ -76,6 +76,7 @@ class ApplicationController < Sinatra::Base
         erb :submit, :layout => :layout
     end
 
+
     post "/submit" do
         if not session[:logged_in]
             redirect get_github_url(@CLIENT_ID, @CLIENT_SECRET)
@@ -86,7 +87,8 @@ class ApplicationController < Sinatra::Base
         ghrepo = params[:ghrepo]
         ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
         if not ghrepo.start_with?("https://github.com/")
-            return "Invalid GitHub URL - make sure it starts with https://github.com!"
+            return @invalid_github = true
+            redirect "/submit"
         end
         project = Project.new({
             :name => params[:name],
@@ -194,7 +196,8 @@ class ApplicationController < Sinatra::Base
         ghrepo = params[:ghrepo]
         ghrepo = ghrepo.gsub("http://github.com/", "https://github.com/") # use https
         if not ghrepo.start_with?("https://github.com/")
-            return "Invalid GitHub URL - make sure it starts with https://github.com!"
+          return @invalid_github = true
+          redirect_to :back
         end
         p.name = params[:name]
         p.authors = params[:authors]

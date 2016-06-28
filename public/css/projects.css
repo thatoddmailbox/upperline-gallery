@@ -1,10 +1,15 @@
 body {
 	padding: 50px;
+  min-width: 1050px;
 }
 .nav {
 	display: block;
 	vertical-align: middle;
-	padding: 0 20px 20px 20px;
+	padding: 0;
+}
+
+.pageheader{
+	float:left;
 }
 
 .header-links a{
@@ -24,11 +29,11 @@ body {
 
 }
 
-.div-border{
+/*.div-border{
 	border-radius: 10px;
 	border: 2px solid black;
 	width: auto;
-}
+}*/
 
 #function-stack {
 	display:block;
@@ -42,9 +47,9 @@ body {
 	font-size: 12px;
 	position: fixed;
 }
-#git-avatar:hover #hidden-username {
+/*#git-avatar:hover #hidden-username {
 	display: block;
-}
+}*/
 #git-avatar {
 	display: inline;
 }
@@ -52,7 +57,7 @@ body {
 	font-size: 4.0em;
 	font-weight: 100;
 	letter-spacing: 10px;
-	float:left;
+	/*float:left;*/
 }
 .unapproved-label{
 	font-size: 2.0em;
@@ -86,6 +91,10 @@ body {
 	display:inline-block;
 }
 
+.hor-center {
+	text-align: center;
+}
+
 .center-header{
 	float:left;
 	vertical-align: middle;
@@ -96,7 +105,6 @@ body {
 
 .header-links-right{
 	float: right;
-	width: 15%;
 }
 
 ul {
@@ -159,7 +167,7 @@ li a {
 }
 
 .project-row {
-	margin-bottom: 10px;
+	margin: 10px 0 10px 0;
 }
 .project-thumb img {
 	width: 100%;
@@ -227,6 +235,7 @@ li a {
 	font-weight: 600;
 	font-style: normal;
 	border: 2px solid #1ca287;
+	margin: 0 2px 0 2px;
 }
 
 .url_button:hover {
@@ -241,16 +250,28 @@ li a {
 	border: 2px solid #1ca287;
 }
 
+#back-url{
+	color: #1ca287;
+	float: left;
+	font-weight: 200;
+	letter-spacing: 2px;
+}
+#back-url:hover{
+	color: #a7dac8;
+	text-decoration: none;
+}
+
 .footer-url {
 	color: #1ca287;
 	float: right;
+	font-weight: 200;
+	letter-spacing: 2px;
 }
 
 .footer-url:hover {
 	color: #a7dac8;
 	text-decoration: none;
 }
-
 .edit-form {
   margin: 0 auto;
 	width: 500px

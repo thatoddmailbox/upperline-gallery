@@ -1,19 +1,20 @@
 <link rel="stylesheet" href="css/projects.css" />
 <div></div>
 <div class="center-text">
-	<a href="/" ><img height="120" src="//static1.squarespace.com/static/567458eda128e6372f9c1656/t/568d23a5bfe87399730d04b5/1466015926308/?format=1500w" alt="Upperline School of Code"></a>
-	<br>
-	<p class="lead">Confirm deletion</p>
+	<p class="lead pageheader">Confirm deletion</p>
 </div>
-<div class="center-text div-border" >
-	<div class="delete-confirmation">Are you sure you want to delete <strong><%= h project.name %></strong>?</div>
+
+<div class="center-text div-border hor-center">
+
+	<div class="delete-confirmation">Are you sure you want to delete "<strong><%= h project.name %></strong>"?</div>
 	<div class="cannot-undone">This cannot be undone.</div><br>
 	<div class="inline">
-		<a href="/" class="btn btn-primary cancel-button vert-align">Cancel</a>
+		<a href="/" class="btn btn-primary url_button vert-align">Cancel</a>
 		<form action="/delete" method="POST" style='float:left'>
 			<input type="hidden" name="id" value="<%= h project.id %>">
 			<input type="submit" value="Delete" class="btn btn-danger delete-button vert-align">
 		</form>
 	</div>
 </div>
+
 <br><br><br>
