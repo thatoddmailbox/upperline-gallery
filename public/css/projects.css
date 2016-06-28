@@ -319,8 +319,9 @@ li a {
 	font-weight: 600;
 	font-style: normal;
 	border: 2px solid #1ca287;
-	width: 100px;
+	width: 32%;
 	float:left;
+	margin-right: 1%;
 }
 
 .small_url_button:hover {
