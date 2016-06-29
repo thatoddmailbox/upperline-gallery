@@ -362,3 +362,16 @@ li a {
 	background-color: #1ca287;
 	border: 2px solid #1ca287;
 }
+
+.btn-icon {
+	display: none;
+}
+
+@media (max-width: 1160px) {
+	.btn-icon {
+		display: inline;
+	}
+	.btn-text {
+		display: none;
+	}
+}

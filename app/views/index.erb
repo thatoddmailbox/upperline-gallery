@@ -33,12 +33,21 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 		<% end %>
 		</div>
 		<div class="project-btn">
-			<a href="<%= URI.encode project.url %>" target="_parent" class="btn btn-primary btn-lg btn-block small_url_button">Visit</a>
+			<a href="<%= URI.encode project.url %>" target="_parent" class="btn btn-primary btn-lg btn-block small_url_button visit_button">
+				<span class="btn-icon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
+				<span class="btn-text">Visit</span>
+			</a>
 			<% if project.github_repo and (project.github_repo != "") %>
-				<a href="<%= URI.encode project.github_repo %>" target="_parent" class="btn btn-default btn-lg small_url_button">GitHub</a>
+				<a href="<%= URI.encode project.github_repo %>" target="_parent" class="btn btn-default btn-lg small_url_button github_button">
+					<span class="btn-icon"><i class="fa fa-github" aria-hidden="true"></i></span>
+					<span class="btn-text">GitHub</span>
+				</a>
 			<% end %>
 			<% if session[:logged_in] and (project.owner == session[:username] or session[:is_admin]) %>
-				<a href="/edit?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button">Edit</a>
+				<a href="/edit?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button edit_button">
+					<span class="btn-icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+					<span class="btn-text">Edit</span>
+				</a>
 				<!-- <a href="/delete?id=<%= project.id %>" class="btn btn-default btn-lg small_url_button">Delete</a> -->
 			<% end %>
 		</div>
