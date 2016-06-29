@@ -33,12 +33,12 @@
 					</div>
 					<div id="function-stack">
 						<li><a class="footer-url" href="/submit"><span style="font-size: 33px;" class="glyphicon glyphicon-plus"></span></a></li>
-							<% if session[:is_admin] %>
-						<li><a class="footer-url" href="/admin">Admin</a></li>
-							<% end %>
+						<% if session[:is_admin] %>
+							<li><a class="footer-url" href="/admin">Admin</a></li>
+						<% end %>
 						<li><a class="footer-url" href="/logout">Log out</a></li>
-							<% end %>
 					</div>
+					<% end %>
 				</ul>
 			</div>
 		</div>
