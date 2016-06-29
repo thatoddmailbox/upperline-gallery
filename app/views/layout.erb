@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="nav">
-			<% if request.fullpath != "/" %>
+			<% if request.path_info != "/" %>
 				<a id="back-url" href="/">&laquo; Back to gallery</a><br>
 			<% end %>
 			<p class="lead pageheader"><%= title %></p>
