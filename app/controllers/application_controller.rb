@@ -166,6 +166,7 @@ class ApplicationController < Sinatra::Base
         redirect "/admin"
     end
 
+
     get "/edit" do
         if not params[:id]
             return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
@@ -219,7 +220,7 @@ class ApplicationController < Sinatra::Base
         if File.exists?("public/screenshots/" + p.id.to_s + ".png")
             File.delete("public/screenshots/" + p.id.to_s + ".png")
         end
-        redirect "/"
+        redirect "/?edited=true"
     end
 
     get "/delete" do
@@ -254,6 +255,6 @@ class ApplicationController < Sinatra::Base
             return erb :error, :layout => :layout, locals: {title: "Error", error: "You do not have access to this page. If you should, try logging out and back in again."}
         end
         Project.delete(p.id)
-        redirect "/"
+        redirect "/?deleted=true"
     end
 end
