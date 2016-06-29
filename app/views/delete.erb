@@ -5,6 +5,7 @@
 	<div class="inline">
 		<a href="/" class="btn btn-primary url_button vert-align">Cancel</a>
 		<form action="/delete" method="POST" style='float:left'>
+			<%= csrf_tag %>
 			<input type="hidden" name="id" value="<%= h project.id %>">
 			<input type="submit" value="Delete" class="btn btn-danger delete-button vert-align">
 		</form>

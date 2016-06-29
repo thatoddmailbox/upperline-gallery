@@ -3,12 +3,14 @@ require_relative "../../config/environment"
 require_relative "../models/project.rb"
 
 require 'rest-client'
+require "rack/csrf"
 
 class ApplicationController < Sinatra::Base
 
     use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :secret => 'secret secret cookie' # FIXME: a real secret
+    use Rack::Csrf, :raise => true
 
     # allow it to be iframed
     set :protection, :except => :frame_options
@@ -58,6 +60,14 @@ class ApplicationController < Sinatra::Base
                 end
             end
             return "screenshots/" + id.to_s + ".png"
+        end
+
+        def csrf_token
+            Rack::Csrf.csrf_token(env)
+        end
+
+        def csrf_tag
+            Rack::Csrf.csrf_tag(env)
         end
     end
 
@@ -149,7 +159,7 @@ class ApplicationController < Sinatra::Base
         erb :admin, :layout => :layout, locals: {title: "Manage projects", unapproved: Project.order(created_at: :desc).where(approved: false) }
     end
 
-    get "/approve" do
+    post "/approve" do
         if not params[:id]
             return erb :error, :layout => :layout, locals: {title: "Error", error: "Missing id parameter!"}
         end

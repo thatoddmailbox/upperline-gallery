@@ -41,6 +41,8 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack_csrf (2.5.0)
+      rack (>= 1.1.0)
     rake (11.2.2)
     redcarpet (3.3.4)
     rest-client (1.8.0)
@@ -92,6 +94,7 @@ DEPENDENCIES
   pg
   pry
   rack-flash3
+  rack_csrf
   rake
   redcarpet
   rest-client
