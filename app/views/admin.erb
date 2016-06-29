@@ -1,6 +1,5 @@
 <div>
 	<div class="unapproved-label">Unapproved projects:</div><br>
-	<div class="project-row">
 		<% require "redcarpet"
 		project_count = 0
 		has_ended_div = false
@@ -9,7 +8,7 @@
 		<% unapproved.each do |project| %>
 			<% has_ended_div = false %>
 			<% if project_count % 3 == 0 %>
-		<div class="project-row">
+			<div class="row project-row">
 			<% end %>
 			<div class="col-md-4">
 				<div class="project-thumb"><img src="<%= get_screenshot_url(project.id, project.url) %>"/></div>
@@ -35,8 +34,17 @@
 				</form>
 
 			</div>
+			<% if project_count % 3 == 2 %>
+				<% has_ended_div = true %>
+				</div>
+			<% end %>
+			<% project_count += 1 %>
+		<% end %>
+
+		<% if not has_ended_div %>
 		</div>
 		<% end %>
+
 		<% if unapproved.length == 0 %>
 			<i>No projects to approve.</i>
 		<% end %>

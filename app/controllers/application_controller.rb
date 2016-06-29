@@ -62,6 +62,11 @@ class ApplicationController < Sinatra::Base
     end
 
     get "/" do
+        if request.host == "gallery.upperlinecode.com"
+            if (not request.referer) or (not request.referer.include? "student-project-gallery")
+                redirect "http://www.upperlinecode.com/student-project-gallery"
+            end
+        end
         erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(created_at: :desc).where(approved: true)}
     end
 
