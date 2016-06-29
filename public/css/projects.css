@@ -375,3 +375,27 @@ li a {
 		display: none;
 	}
 }
+
+@media (max-width: 1059px) {
+	.pageheader {
+		font-size: 3.0em;
+	}
+}
+
+@media (max-width: 918px) {
+	.pageheader {
+		font-size: 2.5em;
+	}
+}
+
+@media (max-width: 837px) {
+	.pageheader {
+		font-size: 2.0em;
+	}
+}
+
+@media (max-width: 771px) {
+	.pageheader {
+		font-size: 1.0em;
+	}
+}
