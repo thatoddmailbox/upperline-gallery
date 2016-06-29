@@ -18,6 +18,8 @@ gem 'rest-client'
 
 gem "pg"
 
+gem "rack_csrf"
+
 group :development do
   gem "pry"
   gem "shotgun"

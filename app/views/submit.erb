@@ -1,5 +1,6 @@
 <div class = "edit-form">
 	<form action="/submit" method="POST">
+		<%= csrf_tag %>
 		<p class = "form-label">Project name:</p>
 		<input type="text" name="name" placeholder="Project name" class="form-control" />
 		<br>

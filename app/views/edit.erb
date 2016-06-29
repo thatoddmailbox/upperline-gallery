@@ -5,6 +5,7 @@
 
 <div class = "edit-form">
 	<form action="/edit" method="POST">
+		<%= csrf_tag %>
 		<input type="hidden" name="id" value="<%= h params[:id] %>" />
 		<br>
 		<p class = "form-label">Project name:</p>
