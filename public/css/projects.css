@@ -396,7 +396,7 @@ li a {
 
 @media (max-width: 771px) {
 	.pageheader {
-		font-size: 1.2em;
+		font-size: 1.4em;
 	}
 	.project:hover:after {
 		background-color: transparent !important;
@@ -406,5 +406,17 @@ li a {
 	}
 	.project {
 		margin-top: 30px;
+	}
+	.pageheader {
+		display: block;
+	}
+	.header-links-right {
+		float: left;
+	}
+	#git-avatar {
+		float: left;
+	}
+	li {
+		float: left;
 	}
 }
