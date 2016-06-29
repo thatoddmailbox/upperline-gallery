@@ -62,10 +62,8 @@ class ApplicationController < Sinatra::Base
     end
 
     get "/" do
-        if request.host == "gallery.upperlinecode.com"
-            if (not request.referer) or (not request.referer.include? "student-project-gallery")
-                redirect "http://www.upperlinecode.com/student-project-gallery"
-            end
+        if params[:hacky_redirect_thing]
+            redirect "http://www.upperlinecode.com/student-project-gallery"
         end
         erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(created_at: :desc).where(approved: true)}
     end
@@ -134,7 +132,11 @@ class ApplicationController < Sinatra::Base
         session[:avatar_url] = auth_result["avatar_url"]
         session[:is_admin] = @admins.include?(session[:username])
 
-        redirect "/"
+        if request.host == "gallery.upperlinecode.com"
+            redirect "/?hacky_redirect_thing=true"
+        else
+            redirect "/"
+        end
     end
 
     get "/admin" do
