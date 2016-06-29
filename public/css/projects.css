@@ -396,6 +396,15 @@ li a {
 
 @media (max-width: 771px) {
 	.pageheader {
-		font-size: 1.0em;
+		font-size: 1.2em;
+	}
+	.project:hover:after {
+		background-color: transparent !important;
+	}
+	.project:hover .project-btn a {
+		background-color: white;
+	}
+	.project {
+		margin-top: 30px;
 	}
 }
