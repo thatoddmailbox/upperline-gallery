@@ -21,11 +21,11 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 	<% end %>
 	<div class="col-md-4 project">
 		<div class="project-thumb">
-			<a target="_parent" href="<%= URI.encode project.url %>"><img src="<%= get_screenshot_url(project.id, project.url) %>"/></a>
+			<a target="_blank" href="<%= URI.encode project.url %>"><img src="<%= get_screenshot_url(project.id, project.url) %>"/></a>
 		</div>
 		<div class="project-name"><%= h project.name %></div>
 		<div class="project-authors"><%= h project.authors %></div>
-		<div class="project-url"><a target="_parent" href="<%= URI.encode project.url %>"><i class="glyphicon glyphicon-globe"></i> <%= h project.url %></a></div>
+		<div class="project-url"><a target="_blank" href="<%= URI.encode project.url %>"><i class="glyphicon glyphicon-globe"></i> <%= h project.url %></a></div>
 		<br>
 		<div class="project-desc">
 		<% if project.description != "" %>
@@ -35,12 +35,12 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 		<% end %>
 		</div>
 		<div class="project-btn">
-			<a href="<%= URI.encode project.url %>" target="_parent" class="btn btn-primary btn-lg btn-block small_url_button visit_button">
+			<a href="<%= URI.encode project.url %>" target="_blank" class="btn btn-primary btn-lg btn-block small_url_button visit_button">
 				<span class="btn-icon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
 				<span class="btn-text">Visit</span>
 			</a>
 			<% if project.github_repo and (project.github_repo != "") %>
-				<a href="<%= URI.encode project.github_repo %>" target="_parent" class="btn btn-default btn-lg small_url_button github_button">
+				<a href="<%= URI.encode project.github_repo %>" target="_blank" class="btn btn-default btn-lg small_url_button github_button">
 					<span class="btn-icon"><i class="fa fa-github" aria-hidden="true"></i></span>
 					<span class="btn-text">GitHub</span>
 				</a>
