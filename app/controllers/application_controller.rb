@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
     use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
                            :secret => 'secret secret cookie' # FIXME: a real secret
-    use Rack::Csrf, :raise => true
+    use Rack::Csrf, :raise => true, :skip => ['POST:/set_starred']
 
     # allow it to be iframed
     set :protection, :except => :frame_options
@@ -272,6 +272,9 @@ class ApplicationController < Sinatra::Base
 
     post "/set_starred" do
         # I could use JSON, but this is easier and it works so too bad
+        if params[:csrf] != Rack::Csrf.token(env)
+            return "Invalid CSRF token!"
+        end
         if not params[:id]
             return "Missing ID parameter!"
         end

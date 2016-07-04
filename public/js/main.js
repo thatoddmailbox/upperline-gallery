@@ -4,19 +4,16 @@ $(document).ready(function() {
 			// we're still loading, go away
 			return;
 		}
+		var token = $('meta[name="_csrf"]').attr('content');
 		var id = $(this).attr("data-project-id");
 		var starred = $(this).hasClass("fa-star");
 		$(this).removeClass("fa-star").removeClass("fa-star-o");
 		$(this).addClass("fa-refresh").addClass("fa-spin");
 		$.ajax({
-			// this beforesend stuff handles the csrf token
-			beforeSend: function(xhr) {
-				var token = $('meta[name="_csrf"]').attr('content');
-				xhr.setRequestHeader('X_CSRF_TOKEN', token);
-			},
 			method: "POST",
 			url: "/set_starred",
 			data: {
+				csrf: token,
 				id: id,
 				starred: !starred
 			},
