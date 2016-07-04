@@ -23,7 +23,13 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(render_options = 
 		<div class="project-thumb">
 			<a target="_blank" href="<%= URI.encode project.url %>"><img src="<%= get_screenshot_url(project.id, project.url) %>"/></a>
 		</div>
-		<div class="project-name"><%= h project.name %></div>
+		<div class="project-name">
+			<%= h project.name %>
+			<% if session[:is_admin] %>
+				<% class_str = project.starred ? "fa-star" : "fa-star-o" %>
+				<i class="fa <%=class_str%> star" data-project-id="<%=project.id%>"></i>
+			<% end %>
+		</div>
 		<div class="project-authors"><%= h project.authors %></div>
 		<div class="project-url"><a target="_blank" href="<%= URI.encode project.url %>"><i class="glyphicon glyphicon-globe"></i> <%= h project.url %></a></div>
 		<br>
