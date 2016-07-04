@@ -6,3 +6,6 @@ body {
 	height: 32px;
 	margin-right: 5px;
 }
+.star {
+	cursor: pointer;
+}

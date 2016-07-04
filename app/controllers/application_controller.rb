@@ -75,7 +75,7 @@ class ApplicationController < Sinatra::Base
         if params[:hacky_redirect_thing]
             redirect "http://www.upperlinecode.com/student-project-gallery"
         end
-        erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(created_at: :desc).where(approved: true)}
+        erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(starred: :desc, created_at: :desc).where(approved: true)}
     end
 
     get "/logout" do
@@ -268,5 +268,32 @@ class ApplicationController < Sinatra::Base
         end
         Project.delete(p.id)
         redirect "/?deleted=true"
+    end
+
+    post "/set_starred" do
+        # I could use JSON, but this is easier and it works so too bad
+        if not params[:id]
+            return "Missing ID parameter!"
+        end
+        if not params[:starred]
+            return "Missing starred parameter!"
+        end
+        if not session[:logged_in]
+            return "You aren't logged in!"
+        end
+        if not session[:is_admin]
+            return "You don't have permission to do this!"
+        end
+        p = Project.where(id: params[:id].to_i).first
+        if not p
+            return "Invalid ID!"
+        end
+        if params[:starred] == "true"
+            p.starred = true
+        else
+            p.starred = false
+        end
+        p.save
+        "OK"
     end
 end
