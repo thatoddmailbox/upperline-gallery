@@ -75,7 +75,7 @@ class ApplicationController < Sinatra::Base
         if params[:hacky_redirect_thing]
             redirect "http://www.upperlinecode.com/student-project-gallery"
         end
-        erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(starred: :desc, created_at: :desc).where(approved: true)}
+        erb :index, :layout => :layout, locals: {title: "Student Project Gallery", projects: Project.order(starred: :asc, created_at: :desc).where(approved: true)}
     end
 
     get "/logout" do
@@ -294,7 +294,7 @@ class ApplicationController < Sinatra::Base
         if params[:starred] == "true"
             p.starred = true
         else
-            p.starred = false
+            p.starred = nil
         end
         p.save
         "OK"
